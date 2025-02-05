@@ -3,7 +3,6 @@ const cors = require("cors");
 require("express-async-errors");
 require("dotenv").config();
 const connectDB = require("./db/connect");
-const authenticate = require("./middleware/authenticate");
 const cookieParser = require("cookie-parser");
 
 // routers
@@ -26,9 +25,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/sensor", sensorRouter);
-app.use("/auth", authRouter);
-app.use("/user", authenticate, userRouter);
+app.use("/user", userRouter);
 
 async function start() {
   try {
